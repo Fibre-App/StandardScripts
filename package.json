@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/GitSolo/StandardScripts#readme",
   "dependencies": {
-    "@gitsolo/types": "0.0.0",
+    "@gitsolo/types": "0.0.3",
     "tsc": "^1.20150623.0"
   }
 }
