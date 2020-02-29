@@ -1,8 +1,8 @@
-import { Script, IScript, IResult, IRepository, IChangeSet } from "@gitsolo/types";
+import { Script, IScript, IResult, IRepository, IChangeSet } from "d:/Users/tobys/Repositories/University/GitSolo/StandardScripts/node_modules/@gitsolo/types/dist/index";
 
 @Script("print")
 export class Print implements IScript {
-	run(...repositories: IRepository[]): IResult {
+	async run(...repositories: IRepository[]): Promise<IResult> {
 		
 		for (const repository of repositories) {
 			const commits: IChangeSet[] = repository.changesets
