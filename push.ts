@@ -1,4 +1,4 @@
-import { Script, IScript, IResult, IRepository } from "d:/Users/tobys/Repositories/University/GitSolo/StandardScripts/node_modules/@gitsolo/types/dist/index";
+import { Script, IScript, IResult, IRepository } from "d:/Users/tobys/Repositories/University/Fibre/StandardScripts/node_modules/@fibre/types/dist/index";
 
 @Script("push")
 export class Push implements IScript {

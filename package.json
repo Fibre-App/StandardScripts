@@ -1,5 +1,5 @@
 {
-  "name": "@gitsolo/standardscripts",
+  "name": "@fibre/standardscripts",
   "version": "1.0.0",
   "description": "StandardScripts",
   "main": "index.js",
@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GitSolo/StandardScripts.git"
+    "url": "git+https://github.com/Fibre-SCM/StandardScripts.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GitSolo/StandardScripts/issues"
+    "url": "https://github.com/Fibre-SCM/StandardScripts/issues"
   },
-  "homepage": "https://github.com/GitSolo/StandardScripts#readme",
+  "homepage": "https://github.com/Fibre-SCM/StandardScripts#readme",
   "dependencies": {
-    "@gitsolo/types": "0.0.8",
+    "@fibre/types": "0.0.0",
     "tsc": "^1.20150623.0"
   }
 }

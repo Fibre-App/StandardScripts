@@ -1,4 +1,4 @@
-import { Script, IScript, IResult, IRepository, IChangeSet } from "d:/Users/tobys/Repositories/University/GitSolo/StandardScripts/node_modules/@gitsolo/types/dist/index";
+import { Script, IScript, IResult, IRepository, IChangeSet } from "d:/Users/tobys/Repositories/University/Fibre/StandardScripts/node_modules/@fibre/types/dist/index";
 
 @Script("print")
 export class Print implements IScript {
