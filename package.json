@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Fibre-SCM/StandardScripts#readme",
   "dependencies": {
-    "@fibre/types": "0.0.0",
+    "@fibre/types": "0.0.2",
     "tsc": "^1.20150623.0"
   }
 }

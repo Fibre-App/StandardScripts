@@ -2,7 +2,7 @@ import { Script, IScript, IResult, IRepository, IChangeSet } from "d:/Users/toby
 
 @Script("print")
 export class Print implements IScript {
-	async run(...repositories: IRepository[]): Promise<IResult> {
+	async run(repositories: IRepository[]): Promise<IResult> {
 		
 		for (const repository of repositories) {
 			const commits: IChangeSet[] = repository.changesets

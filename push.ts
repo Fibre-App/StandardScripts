@@ -3,7 +3,7 @@ import { Script, IScript, IResult, IRepository } from "d:/Users/tobys/Repositori
 @Script("push")
 export class Push implements IScript {
 	
-	public async run(...repositories: IRepository[]): Promise<IResult> {
+	public async run(repositories: IRepository[]): Promise<IResult> {
 		
 		for (const repository of repositories) {
 			await repository.push();
