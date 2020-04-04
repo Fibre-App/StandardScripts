@@ -1,4 +1,4 @@
-import { Script, IScript, IResult, IRepository } from "d:/Users/tobys/Repositories/University/Fibre/StandardScripts/node_modules/@fibre/types/dist/index";
+import { Script, IScript, IResult, IRepository } from "@fibre/types";
 
 @Script("pull")
 export class Pull implements IScript {

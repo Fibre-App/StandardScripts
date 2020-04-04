@@ -1,4 +1,4 @@
-import { Script, IScript, IResult, IRepository, Inject, A, IDialogService } from "d:/Users/tobys/Repositories/University/Fibre/StandardScripts/node_modules/@fibre/types/dist/index";
+import { Script, IScript, IResult, IRepository, Inject, A, IDialogService } from "@fibre/types";
 
 @Script("commit")
 export class Commit implements IScript {
