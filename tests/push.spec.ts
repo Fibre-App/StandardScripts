@@ -1,4 +1,4 @@
-import { IMock, Mock, Times } from "typemoq";
+import { IMock, Mock, Times } from "typemoq-continued";
 import { IRepository, IResult } from "@fibre/types";
 import { assert } from "chai";
 import { Push } from "../src/push";

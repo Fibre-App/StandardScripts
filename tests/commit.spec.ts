@@ -1,5 +1,5 @@
 import { describe } from "mocha";
-import { IMock, Mock, It, Times } from "typemoq";
+import { IMock, Mock, It, Times } from "typemoq-continued";
 import { assert } from "chai";
 import { IDialogService, IRepository, IResult } from "@fibre/types";
 import { Commit } from "../src/commit";
