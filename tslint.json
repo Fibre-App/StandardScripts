@@ -6,6 +6,7 @@
     "deprecation": {
       "severity": "warning"
     },
+    "eofline": true,
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -42,6 +43,7 @@
     "no-non-null-assertion": true,
     "no-null-keyword": true,
     "no-redundant-jsdoc": true,
+    "no-shadowed-variable": true,
     "no-switch-case-fall-through": true,
     "no-unused-variable": true,
     "no-var-requires": false,
