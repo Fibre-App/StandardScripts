@@ -12,13 +12,13 @@
     "url": "git+https://github.com/Fibre-SCM/StandardScripts.git"
   },
   "author": "",
-  "license": "GNU GPLV3+",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/Fibre-SCM/StandardScripts/issues"
   },
   "homepage": "https://github.com/Fibre-SCM/StandardScripts#readme",
   "dependencies": {
-    "@fibre/types": "0.0.x",
+    "@fibre/types": "0.0.14",
     "tsc": "^1.20150623.0"
   },
   "devDependencies": {
