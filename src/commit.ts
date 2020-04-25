@@ -1,6 +1,10 @@
 import { Script, IScript, IResult, IRepository, Inject, A, IDialogService } from "@fibre/types";
 
-@Script("commit")
+@Script({
+	label: "commit",
+	tooltip: "Commits all staged changes",
+	ionIcon : "gitCommitOutline"
+})
 export class Commit implements IScript {
 
 	constructor(@Inject(A.DialogService) private readonly dialogService: IDialogService) { }
