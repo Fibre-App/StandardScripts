@@ -11,7 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/Fibre-SCM/StandardScripts.git"
   },
-  "author": "",
+  "author": {
+    "name": "Toby Smith",
+    "email": "toby@fibre-app.com",
+    "url": "https://tobysmith.uk"
+  },
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/Fibre-SCM/StandardScripts/issues"
