@@ -1,7 +1,7 @@
 import { describe } from "mocha";
 import { IMock, Mock, It, Times } from "typemoq-continued";
 import { assert } from "chai";
-import { IDialogService, IRepository, IResult } from "@fibre/types";
+import { IDialogService, IRepository, IResult, IToasterService } from "@fibre/types";
 import { Commit } from "../src/commit";
 
 describe("In the Commit script", () => {
@@ -9,11 +9,13 @@ describe("In the Commit script", () => {
 	let subject: Commit | undefined;
 
 	let dialogService: IMock<IDialogService>;
+	let toasterService: IMock<IToasterService>;
 
 	beforeEach(() => {
 		subject = undefined;
 
 		dialogService = Mock.ofType<IDialogService>();
+		toasterService = Mock.ofType<IToasterService>();
 	});
 
 	describe("run", () => {
@@ -81,6 +83,60 @@ describe("In the Commit script", () => {
 			repo3.verify(r => r.commit(commitMessage), Times.once());
 		});
 
+		[
+			[ { commit: (message: string) => {} } ],
+			[ { commit: (message: string) => {} }, { commit: (message: string) => {} } ],
+			[ { commit: (message: string) => {} }, { commit: (message: string) => {} }, { commit: (message: string) => {} } ]
+		].forEach(collection => it("should call success on the toaster service for each repository where there is "
+			+ collection.length, async () => {
+			given_subject_isInstantiated();
+
+			await subject?.run(collection as any[]);
+
+			toasterService.verify(t => t.success(It.isAny(), It.isAny(), It.isAny()), Times.exactly(collection.length));
+		}));
+
+		[
+			[ { commit: (message: string) => {} } ],
+			[ { commit: (message: string) => {} }, { commit: (message: string) => {} } ],
+			[ { commit: (message: string) => {} }, { commit: (message: string) => {} }, { commit: (message: string) => {} } ]
+		].forEach(collection => it("should call success on the toaster service with the title placeholder for each repository where there is "
+			+ collection.length, async () => {
+			given_subject_isInstantiated();
+
+			await subject?.run(collection as any[]);
+
+			toasterService.verify(t => t.success("SuccessToasterTitle", It.isAny(), It.isAny()), Times.exactly(collection.length));
+		}));
+
+		[
+			[ { commit: (message: string) => {} } ],
+			[ { commit: (message: string) => {} }, { commit: (message: string) => {} } ],
+			[ { commit: (message: string) => {} }, { commit: (message: string) => {} }, { commit: (message: string) => {} } ]
+		].forEach(collection => it("should call success on the toaster service with the message placeholder for each repository where there is "
+			+ collection.length, async () => {
+			given_subject_isInstantiated();
+
+			await subject?.run(collection as any[]);
+
+			toasterService.verify(t => t.success(It.isAny(), "SuccessToasterMessage", It.isAny()), Times.exactly(collection.length));
+		}));
+
+		[
+			[ { commit: (message: string) => {}, name: "name1.1" } ],
+			[ { commit: (message: string) => {}, name: "name2.1" }, { commit: (message: string) => {}, name: "name2.2" } ],
+			[ { commit: (message: string) => {}, name: "name3.1" }, { commit: (message: string) => {}, name: "name3.2" }, { commit: (message: string) => {}, name: "name3.3" } ]
+		].forEach(collection => it("should call success on the toaster service with the repository name arg for each repository where there is "
+			+ collection.length, async () => {
+			given_subject_isInstantiated();
+
+			await subject?.run(collection as any[]);
+
+			collection.forEach(c => {
+				toasterService.verify(t => t.success(It.isAny(), It.isAny(), It.is(i => i.repoName === c.name)), Times.once());
+			});
+		}));
+
 		it("should return an IResult with success: true", async () => {
 			given_subject_isInstantiated();
 
@@ -91,7 +147,7 @@ describe("In the Commit script", () => {
 	});
 
 	function given_subject_isInstantiated(): void {
-		subject = new Commit(dialogService.object);
+		subject = new Commit(dialogService.object, toasterService.object);
 	}
 
 	function given_dialogService_openSingleLineDialog_returns(returns: string): void {
