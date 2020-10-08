@@ -16,6 +16,7 @@
     "email": "toby@fibre-app.com",
     "url": "https://tobysmith.uk"
   },
+  "prettier": "@tobysmith568/prettier-config",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/Fibre-SCM/StandardScripts/issues"
@@ -26,6 +27,7 @@
     "tsc": "^1.20150623.0"
   },
   "devDependencies": {
+    "@tobysmith568/prettier-config": "^1.0.0",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "chai": "^4.2.0",

@@ -4,97 +4,135 @@ import { assert } from "chai";
 import { Push } from "../src/push";
 
 describe("In the Push script", () => {
+  let subject: Push | undefined;
 
-	let subject: Push | undefined;
+  let toasterService: IMock<IToasterService>;
 
-	let toasterService: IMock<IToasterService>;
+  beforeEach(() => {
+    subject = undefined;
 
-	beforeEach(() => {
-		subject = undefined;
+    toasterService = Mock.ofType<IToasterService>();
+  });
 
-		toasterService = Mock.ofType<IToasterService>();
-	});
+  describe("run", () => {
+    it("should call push on each repository passed in", async () => {
+      given_subject_isInstantiated();
 
-	describe("run", () => {
+      const repo1: IMock<IRepository> = Mock.ofType<IRepository>();
+      const repo2: IMock<IRepository> = Mock.ofType<IRepository>();
+      const repo3: IMock<IRepository> = Mock.ofType<IRepository>();
 
-		it("should call push on each repository passed in", async () => {
-			given_subject_isInstantiated();
+      await subject?.run([repo1.object, repo2.object, repo3.object]);
 
-			const repo1: IMock<IRepository> = Mock.ofType<IRepository>();
-			const repo2: IMock<IRepository> = Mock.ofType<IRepository>();
-			const repo3: IMock<IRepository> = Mock.ofType<IRepository>();
+      repo1.verify(r => r.push(), Times.once());
+      repo2.verify(r => r.push(), Times.once());
+      repo3.verify(r => r.push(), Times.once());
+    });
 
-			await subject?.run([ repo1.object, repo2.object, repo3.object ]);
+    [
+      [{ push: () => {} }],
+      [{ push: () => {} }, { push: () => {} }],
+      [{ push: () => {} }, { push: () => {} }, { push: () => {} }]
+    ].forEach(collection =>
+      it(
+        "should call success on the toaster service for each repository where there is " + collection.length,
+        async () => {
+          given_subject_isInstantiated();
 
-			repo1.verify(r => r.push(), Times.once());
-			repo2.verify(r => r.push(), Times.once());
-			repo3.verify(r => r.push(), Times.once());
-		});
+          await subject?.run(collection as any[]);
 
-		[
-			[ { push: () => {} } ],
-			[ { push: () => {} }, { push: () => {} } ],
-			[ { push: () => {} }, { push: () => {} }, { push: () => {} } ]
-		].forEach(collection => it("should call success on the toaster service for each repository where there is "
-			+ collection.length, async () => {
-			given_subject_isInstantiated();
+          toasterService.verify(t => t.success(It.isAny(), It.isAny(), It.isAny()), Times.exactly(collection.length));
+        }
+      )
+    );
 
-			await subject?.run(collection as any[]);
+    [
+      [{ push: () => {} }],
+      [{ push: () => {} }, { push: () => {} }],
+      [{ push: () => {} }, { push: () => {} }, { push: () => {} }]
+    ].forEach(collection =>
+      it(
+        "should call success on the toaster service with the title placeholder for each repository where there is " +
+          collection.length,
+        async () => {
+          given_subject_isInstantiated();
 
-			toasterService.verify(t => t.success(It.isAny(), It.isAny(), It.isAny()), Times.exactly(collection.length));
-		}));
+          await subject?.run(collection as any[]);
 
-		[
-			[ { push: () => {} } ],
-			[ { push: () => {} }, { push: () => {} } ],
-			[ { push: () => {} }, { push: () => {} }, { push: () => {} } ]
-		].forEach(collection => it("should call success on the toaster service with the title placeholder for each repository where there is "
-			+ collection.length, async () => {
-			given_subject_isInstantiated();
+          toasterService.verify(
+            t => t.success("SuccessToasterTitle", It.isAny(), It.isAny()),
+            Times.exactly(collection.length)
+          );
+        }
+      )
+    );
 
-			await subject?.run(collection as any[]);
+    [
+      [{ push: () => {} }],
+      [{ push: () => {} }, { push: () => {} }],
+      [{ push: () => {} }, { push: () => {} }, { push: () => {} }]
+    ].forEach(collection =>
+      it(
+        "should call success on the toaster service with the message placeholder for each repository where there is " +
+          collection.length,
+        async () => {
+          given_subject_isInstantiated();
 
-			toasterService.verify(t => t.success("SuccessToasterTitle", It.isAny(), It.isAny()), Times.exactly(collection.length));
-		}));
+          await subject?.run(collection as any[]);
 
-		[
-			[ { push: () => {} } ],
-			[ { push: () => {} }, { push: () => {} } ],
-			[ { push: () => {} }, { push: () => {} }, { push: () => {} } ]
-		].forEach(collection => it("should call success on the toaster service with the message placeholder for each repository where there is "
-			+ collection.length, async () => {
-			given_subject_isInstantiated();
+          toasterService.verify(
+            t => t.success(It.isAny(), "SuccessToasterMessage", It.isAny()),
+            Times.exactly(collection.length)
+          );
+        }
+      )
+    );
 
-			await subject?.run(collection as any[]);
+    [
+      [{ push: () => {}, name: "name1.1" }],
+      [
+        { push: () => {}, name: "name2.1" },
+        { push: () => {}, name: "name2.2" }
+      ],
+      [
+        { push: () => {}, name: "name3.1" },
+        { push: () => {}, name: "name3.2" },
+        { push: () => {}, name: "name3.3" }
+      ]
+    ].forEach(collection =>
+      it(
+        "should call success on the toaster service with the repository name arg for each repository where there is " +
+          collection.length,
+        async () => {
+          given_subject_isInstantiated();
 
-			toasterService.verify(t => t.success(It.isAny(), "SuccessToasterMessage", It.isAny()), Times.exactly(collection.length));
-		}));
+          await subject?.run(collection as any[]);
 
-		[
-			[ { push: () => {}, name: "name1.1" } ],
-			[ { push: () => {}, name: "name2.1" }, { push: () => {}, name: "name2.2" } ],
-			[ { push: () => {}, name: "name3.1" }, { push: () => {}, name: "name3.2" }, { push: () => {}, name: "name3.3" } ]
-		].forEach(collection => it("should call success on the toaster service with the repository name arg for each repository where there is "
-			+ collection.length, async () => {
-			given_subject_isInstantiated();
+          collection.forEach(c => {
+            toasterService.verify(
+              t =>
+                t.success(
+                  It.isAny(),
+                  It.isAny(),
+                  It.is(i => i.repoName === c.name)
+                ),
+              Times.once()
+            );
+          });
+        }
+      )
+    );
 
-			await subject?.run(collection as any[]);
+    it("should return an IResult with success: true", async () => {
+      given_subject_isInstantiated();
 
-			collection.forEach(c => {
-				toasterService.verify(t => t.success(It.isAny(), It.isAny(), It.is(i => i.repoName === c.name)), Times.once());
-			});
-		}));
+      const result: IResult | undefined = await subject?.run([]);
 
-		it("should return an IResult with success: true", async () => {
-			given_subject_isInstantiated();
+      assert.deepStrictEqual(result, { success: true });
+    });
+  });
 
-			const result: IResult | undefined = await subject?.run([]);
-
-			assert.deepStrictEqual(result, { success : true });
-		});
-	});
-
-	function given_subject_isInstantiated(): void {
-		subject = new Push(toasterService.object);
-	}
+  function given_subject_isInstantiated(): void {
+    subject = new Push(toasterService.object);
+  }
 });
