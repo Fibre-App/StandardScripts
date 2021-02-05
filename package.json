@@ -2,8 +2,12 @@
   "name": "@fibre/standardscripts",
   "version": "1.0.0",
   "description": "StandardScripts",
-  "main": "index.js",
+  "main": "",
+  "files": [
+    "dist/src"
+  ],
   "scripts": {
+    "build": "tsc",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts",
     "coverage": "nyc --reporter=html --reporter=cobertura mocha -r ts-node/register 'tests/**/*.spec.ts'"
   },
@@ -12,12 +16,12 @@
     "url": "git+https://github.com/Fibre-SCM/StandardScripts.git"
   },
   "author": {
-    "name": "Toby Smith",
-    "email": "toby@fibre-app.com",
-    "url": "https://tobysmith.uk"
+    "name": "Fibre",
+    "email": "contact@fibre-app.com",
+    "url": "https://fibre-app.com"
   },
-  "prettier": "@tobysmith568/prettier-config",
-  "license": "GPL-3.0-or-later",
+  "prettier": "@fibre/prettier-config",
+  "license": "UNLICENCED",
   "bugs": {
     "url": "https://github.com/Fibre-SCM/StandardScripts/issues"
   },
@@ -26,7 +30,7 @@
     "@fibre/types": "0.0.18"
   },
   "devDependencies": {
-    "@tobysmith568/prettier-config": "^1.0.0",
+    "@fibre/prettier-config": "^1.0.1",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "chai": "^4.2.0",
