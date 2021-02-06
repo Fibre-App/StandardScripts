@@ -1,7 +1,16 @@
-import { Script, IScript, IResult, IRepository, Inject, A, IDialogService, IToasterService } from "@fibre/types";
+import {
+  Script,
+  IScript,
+  IResult,
+  IRepository,
+  Inject,
+  A,
+  IDialogService,
+  IToasterService
+} from "@fibre/types";
 
 @Script({
-  label: "commit",
+  label: "Commit",
   tooltip: "Commits all staged changes",
   ionIcon: "gitCommitOutline",
   translations: {
@@ -26,7 +35,9 @@ export class Commit implements IScript {
 
     for (const repository of repositories) {
       await repository.commit(message);
-      this.toasterService.success("SuccessToasterTitle", "SuccessToasterMessage", { repoName: repository.name });
+      this.toasterService.success("SuccessToasterTitle", "SuccessToasterMessage", {
+        repoName: repository.name
+      });
     }
 
     return { success: true };

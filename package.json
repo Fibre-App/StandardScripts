@@ -1,15 +1,17 @@
 {
-  "name": "@fibre/standardscripts",
+  "name": "@fibre/standard-scripts",
   "version": "1.0.0",
-  "description": "StandardScripts",
+  "description": "Standard Scripts",
   "main": "",
   "files": [
-    "dist/src"
+    "dist/src/*.js"
   ],
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts",
-    "coverage": "nyc --reporter=html --reporter=cobertura mocha -r ts-node/register 'tests/**/*.spec.ts'"
+    "coverage": "nyc --reporter=html --reporter=cobertura mocha -r ts-node/register 'tests/**/*.spec.ts'",
+    "prepack": "npm run build",
+    "publish": "npm publish --acc"
   },
   "repository": {
     "type": "git",

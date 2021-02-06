@@ -1,7 +1,7 @@
 import { Script, IScript, IResult, IRepository, IToasterService, Inject, A } from "@fibre/types";
 
 @Script({
-  label: "push",
+  label: "Push",
   tooltip: "Pushes changes to the origin",
   ionIcon: "arrowUpOutline",
   translations: {
@@ -17,7 +17,9 @@ export class Push implements IScript {
   public async run(repositories: IRepository[]): Promise<IResult> {
     for (const repository of repositories) {
       await repository.push();
-      this.toasterService.success("SuccessToasterTitle", "SuccessToasterMessage", { repoName: repository.name });
+      this.toasterService.success("SuccessToasterTitle", "SuccessToasterMessage", {
+        repoName: repository.name
+      });
     }
 
     return { success: true };
