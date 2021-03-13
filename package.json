@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fibre-SCM/StandardScripts.git"
+    "url": "git+https://github.com/Fibre-App/StandardScripts.git"
   },
   "author": {
     "name": "Fibre",
@@ -25,9 +25,9 @@
   "prettier": "@fibre/prettier-config",
   "license": "UNLICENCED",
   "bugs": {
-    "url": "https://github.com/Fibre-SCM/StandardScripts/issues"
+    "url": "https://github.com/Fibre-App/StandardScripts/issues"
   },
-  "homepage": "https://github.com/Fibre-SCM/StandardScripts#readme",
+  "homepage": "https://github.com/Fibre-App/StandardScripts#readme",
   "dependencies": {
     "@fibre/types": "0.0.19"
   },
