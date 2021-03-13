@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/Fibre-SCM/StandardScripts#readme",
   "dependencies": {
-    "@fibre/types": "0.0.18"
+    "@fibre/types": "0.0.19"
   },
   "devDependencies": {
     "@fibre/prettier-config": "^1.0.1",
