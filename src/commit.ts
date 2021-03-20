@@ -12,13 +12,7 @@ import {
 @Script({
   label: "Commit",
   tooltip: "Commits all staged changes",
-  ionIcon: "gitCommitOutline",
-  translations: {
-    "en-gb": {
-      SuccessToasterTitle: "Committed!",
-      SuccessToasterMessage: "Successfully committed ${repoName}"
-    }
-  }
+  ionIcon: "gitCommitOutline"
 })
 export class Commit implements IScript {
   constructor(
@@ -35,9 +29,7 @@ export class Commit implements IScript {
 
     for (const repository of repositories) {
       await repository.commit(message);
-      this.toasterService.success("SuccessToasterTitle", "SuccessToasterMessage", {
-        repoName: repository.name
-      });
+      this.toasterService.success("Committed!", `Successfully committed ${repository.name}`);
     }
 
     return { success: true };

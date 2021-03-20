@@ -3,13 +3,7 @@ import { Script, IScript, IResult, IRepository, Inject, A, IToasterService } fro
 @Script({
   label: "Pull",
   tooltip: "Pulls changes from the origin",
-  ionIcon: "arrowDownOutline",
-  translations: {
-    "en-gb": {
-      SuccessToasterTitle: "Pulled!",
-      SuccessToasterMessage: "Successfully pulled ${repoName}"
-    }
-  }
+  ionIcon: "arrowDownOutline"
 })
 export class Pull implements IScript {
   constructor(@Inject(A.ToasterService) private readonly toasterService: IToasterService) {}
@@ -17,9 +11,7 @@ export class Pull implements IScript {
   public async run(repositories: IRepository[]): Promise<IResult> {
     for (const repository of repositories) {
       await repository.pull();
-      this.toasterService.success("SuccessToasterTitle", "SuccessToasterMessage", {
-        repoName: repository.name
-      });
+      this.toasterService.success("Pulled!", `Successfully pulled ${repository.name}`);
     }
 
     return { success: true };

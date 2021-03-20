@@ -3,13 +3,7 @@ import { Script, IScript, IResult, IRepository, IToasterService, Inject, A } fro
 @Script({
   label: "Push",
   tooltip: "Pushes changes to the origin",
-  ionIcon: "arrowUpOutline",
-  translations: {
-    "en-gb": {
-      SuccessToasterTitle: "Pushed!",
-      SuccessToasterMessage: "Successfully pushed ${repoName}"
-    }
-  }
+  ionIcon: "arrowUpOutline"
 })
 export class Push implements IScript {
   constructor(@Inject(A.ToasterService) private readonly toasterService: IToasterService) {}
@@ -17,9 +11,7 @@ export class Push implements IScript {
   public async run(repositories: IRepository[]): Promise<IResult> {
     for (const repository of repositories) {
       await repository.push();
-      this.toasterService.success("SuccessToasterTitle", "SuccessToasterMessage", {
-        repoName: repository.name
-      });
+      this.toasterService.success("Pushed!", `Successfully pushed ${repository.name}`);
     }
 
     return { success: true };
